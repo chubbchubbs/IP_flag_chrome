@@ -32,8 +32,8 @@
   ],
 
   "host_permissions": [
-    "https://ipwho.is/*",
-    "https://ipapi.co/*",
+    "https://ipinfo.io/*",
+    "https://freeipapi.com/*",
     "https://flagcdn.com/*"
   ]
 }

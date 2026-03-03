@@ -1,15 +1,15 @@
 'use strict';
 
 const UPDATE_ALARM = 'updateFlag';
-const GEO_URL_PRIMARY  = 'https://ipwho.is/';
-const GEO_URL_FALLBACK = 'https://ipapi.co/json/';
+const GEO_URL_PRIMARY  = 'https://ipinfo.io/json';
+const GEO_URL_FALLBACK = 'https://freeipapi.com/api/json';
 const FLAG_CDN         = 'https://flagcdn.com/w128/';
 const ICON_SIZES       = [16, 32, 48, 128];
 
 // ── Geo fetch ──────────────────────────────────────────────────────────────
 
 async function fetchGeoData() {
-  // Primary: ipwho.is (free, unlimited)
+  // Primary: ipinfo.io (free, 50k req/month, extension-friendly)
   try {
     const resp = await fetch(GEO_URL_PRIMARY, {
       headers: { 'Accept': 'application/json' },
@@ -17,24 +17,24 @@ async function fetchGeoData() {
     });
     if (resp.ok) {
       const d = await resp.json();
-      if (d.success && d.country_code) {
+      if (d.country) {
         return {
           ip:          d.ip,
-          country:     d.country_code.toLowerCase(),
-          countryName: d.country       || d.country_code,
-          city:        d.city          || '',
-          region:      d.region        || ''
+          country:     d.country.toLowerCase(),
+          countryName: d.country,
+          city:        d.city   || '',
+          region:      d.region || ''
         };
       }
-      console.warn('[FlagExt] ipwho.is bad response:', JSON.stringify(d).slice(0, 200));
+      console.warn('[FlagExt] ipinfo.io bad response:', JSON.stringify(d).slice(0, 200));
     } else {
-      console.warn('[FlagExt] ipwho.is HTTP', resp.status);
+      console.warn('[FlagExt] ipinfo.io HTTP', resp.status);
     }
   } catch (e) {
-    console.warn('[FlagExt] ipwho.is failed:', e.message);
+    console.warn('[FlagExt] ipinfo.io failed:', e.message);
   }
 
-  // Fallback: ipapi.co (1000 req/day free)
+  // Fallback: freeipapi.com (free, unlimited, HTTPS)
   try {
     const resp = await fetch(GEO_URL_FALLBACK, {
       headers: { 'Accept': 'application/json' },
@@ -42,21 +42,21 @@ async function fetchGeoData() {
     });
     if (resp.ok) {
       const d = await resp.json();
-      if (d.country_code) {
+      if (d.countryCode) {
         return {
-          ip:          d.ip,
-          country:     d.country_code.toLowerCase(),
-          countryName: d.country_name || d.country_code,
-          city:        d.city         || '',
-          region:      d.region       || ''
+          ip:          d.ipAddress,
+          country:     d.countryCode.toLowerCase(),
+          countryName: d.countryName || d.countryCode,
+          city:        d.cityName    || '',
+          region:      d.regionName  || ''
         };
       }
-      console.warn('[FlagExt] ipapi.co bad response:', JSON.stringify(d).slice(0, 200));
+      console.warn('[FlagExt] freeipapi.com bad response:', JSON.stringify(d).slice(0, 200));
     } else {
-      console.warn('[FlagExt] ipapi.co HTTP', resp.status);
+      console.warn('[FlagExt] freeipapi.com HTTP', resp.status);
     }
   } catch (e) {
-    console.warn('[FlagExt] ipapi.co failed:', e.message);
+    console.warn('[FlagExt] freeipapi.com failed:', e.message);
   }
 
   return null;
