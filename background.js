@@ -26,6 +26,9 @@ async function fetchGeoData() {
           region:      d.region        || ''
         };
       }
+      console.warn('[FlagExt] ipwho.is bad response:', JSON.stringify(d).slice(0, 200));
+    } else {
+      console.warn('[FlagExt] ipwho.is HTTP', resp.status);
     }
   } catch (e) {
     console.warn('[FlagExt] ipwho.is failed:', e.message);
@@ -48,6 +51,9 @@ async function fetchGeoData() {
           region:      d.region       || ''
         };
       }
+      console.warn('[FlagExt] ipapi.co bad response:', JSON.stringify(d).slice(0, 200));
+    } else {
+      console.warn('[FlagExt] ipapi.co HTTP', resp.status);
     }
   } catch (e) {
     console.warn('[FlagExt] ipapi.co failed:', e.message);
