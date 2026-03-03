@@ -1,0 +1,148 @@
+/* ── Reset ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Base ─────────────────────────────────────────────── */
+body {
+  width: 290px;
+  background: #12121f;
+  color: #dde1f0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  user-select: none;
+}
+
+/* ── States ───────────────────────────────────────────── */
+.state        { padding: 20px; }
+.hidden       { display: none !important; }
+
+/* ── Loading ──────────────────────────────────────────── */
+#state-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: #666;
+  padding: 36px 20px;
+}
+
+.spinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #2a2a45;
+  border-top-color: #4e8cf0;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Flag ─────────────────────────────────────────────── */
+.flag-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 22px 20px 14px;
+  background: #0e0e1d;
+}
+
+#flagImg {
+  width: 210px;
+  height: 140px;
+  object-fit: contain;
+  border-radius: 5px;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.07);
+  transition: opacity 0.3s;
+}
+
+#flagImg[src=""] { opacity: 0; }
+
+/* ── Card ─────────────────────────────────────────────── */
+.card {
+  padding: 14px 18px 10px;
+  background: #12121f;
+  border-bottom: 1px solid #1e1e35;
+}
+
+.country-name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 13px;
+}
+
+/* ── Rows ─────────────────────────────────────────────── */
+.rows { display: flex; flex-direction: column; gap: 1px; }
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #1c1c30;
+}
+.row:last-child { border-bottom: none; }
+
+.lbl {
+  flex: 0 0 68px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #555;
+}
+
+.val {
+  flex: 1;
+  color: #c5cce8;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mono { font-family: 'SF Mono', 'Consolas', 'Menlo', monospace; font-size: 12px; }
+.dim  { color: #4a4a70; }
+
+/* ── Refresh button ───────────────────────────────────── */
+.btn-refresh {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: calc(100% - 36px);
+  margin: 14px 18px;
+  padding: 9px 0;
+  background: #171730;
+  color: #4e8cf0;
+  border: 1px solid #222245;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s, transform 0.1s;
+}
+
+.btn-refresh:hover   { background: #1e1e48; color: #7aabff; }
+.btn-refresh:active  { transform: scale(0.97); }
+.btn-refresh:disabled{ opacity: 0.45; cursor: default; transform: none; }
+
+.ico {
+  font-size: 17px;
+  line-height: 1;
+  display: inline-block;
+  transition: transform 0.5s;
+}
+
+.btn-refresh.spinning .ico { animation: spin 0.5s linear infinite; }
+
+/* ── Error ────────────────────────────────────────────── */
+#state-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.err-icon { font-size: 36px; }
+.err-text { color: #888; font-size: 12px; line-height: 1.5; }

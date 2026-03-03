@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Country Flag</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Loading -->
+    <div id="state-loading" class="state">
+      <div class="spinner"></div>
+      <p>Определение местоположения…</p>
+    </div>
+
+    <!-- Main info -->
+    <div id="state-main" class="state hidden">
+      <div class="flag-wrap">
+        <img id="flagImg" alt="Флаг">
+      </div>
+
+      <div class="card">
+        <div id="countryName" class="country-name"></div>
+
+        <div class="rows">
+          <div class="row">
+            <span class="lbl">IP</span>
+            <span id="ipAddr" class="val mono"></span>
+          </div>
+          <div class="row">
+            <span class="lbl">Город</span>
+            <span id="city" class="val"></span>
+          </div>
+          <div class="row">
+            <span class="lbl">Регион</span>
+            <span id="region" class="val"></span>
+          </div>
+          <div class="row">
+            <span class="lbl">Обновлено</span>
+            <span id="lastUpdate" class="val mono dim"></span>
+          </div>
+        </div>
+      </div>
+
+      <button id="btnRefresh" class="btn-refresh">
+        <span class="ico">↻</span> Обновить сейчас
+      </button>
+    </div>
+
+    <!-- Error -->
+    <div id="state-error" class="state hidden">
+      <div class="err-icon">⚠</div>
+      <p id="errMsg" class="err-text"></p>
+      <button id="btnRetry" class="btn-refresh">Повторить</button>
+    </div>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
