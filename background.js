@@ -3,7 +3,7 @@
 const UPDATE_ALARM = 'updateFlag';
 const GEO_URL_PRIMARY  = 'https://ipinfo.io/json';
 const GEO_URL_FALLBACK = 'https://freeipapi.com/api/json';
-const FLAG_CDN         = 'https://flagcdn.com/w128/';
+const FLAG_CDN         = 'https://flagcdn.com/w160/';
 const ICON_SIZES       = [16, 32, 48, 128];
 
 // ── Geo fetch ──────────────────────────────────────────────────────────────
