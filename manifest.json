@@ -28,8 +28,7 @@
 
   "permissions": [
     "alarms",
-    "storage",
-    "action"
+    "storage"
   ],
 
   "host_permissions": [
